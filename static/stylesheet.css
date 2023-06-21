@@ -1,0 +1,15 @@
+.container {
+    padding: 0 calc(max(5%, 50% - 600px));
+    margin: 0;
+}
+
+code {
+    font-family: monospace;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

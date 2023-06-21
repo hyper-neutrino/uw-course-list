@@ -1,16 +1,24 @@
 <script lang="ts">
     export let data: any;
     const cache = new Map<string, any[]>();
+
+    let year: number = parseInt(data.term.slice(0, -1)) + 1900;
+    let season: "1" | "5" | "9" = data.term.slice(-1);
 </script>
 
 <div id="box">
     <div id="container">
-        <input type="number" value={parseInt(data.term.slice(0, -1)) + 1900} />
-        <select value={data.term.slice(-1)}>
-            <option value="1">Winter</option>
-            <option value="5">Spring</option>
-            <option value="9">Fall</option>
-        </select>
+        <div>
+            <input type="number" bind:value={year} />
+            <select bind:value={season}>
+                <option value="1">Winter</option>
+                <option value="5">Spring</option>
+                <option value="9">Fall</option>
+            </select>
+        </div>
+        <div>
+            <a href="/course-explorer/{year - 1900}{season}">Go!</a>
+        </div>
     </div>
 </div>
 
@@ -19,14 +27,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
-        background: linear-gradient(120deg, #111, #333, #222);
+        height: 100vh;
     }
 
     #container {
         padding: 5vh 5vw;
-        border: 5px solid #eeccee;
+        border: 5px solid #ff0077;
         border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 
     input::-webkit-outer-spin-button,
@@ -38,15 +48,20 @@
     input[type="number"] {
         -moz-appearance: textfield;
         appearance: textfield;
+        width: calc(max(10vw, 100px));
     }
 
     input,
     select {
-        color: white;
-        font-size: 150%;
+        font-size: 100%;
         padding: 0.25em;
-        background-color: #fff2;
+        background-color: #0002;
         border: none;
         outline: none;
+    }
+
+    a {
+        color: #222;
+        font-weight: bold;
     }
 </style>
